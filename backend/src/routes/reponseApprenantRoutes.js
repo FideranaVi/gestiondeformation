@@ -6,7 +6,7 @@ const {
   enregistrerReponseApprenant,
   afficherReponsesApprenant,
   supprimerReponseApprenant
-} = require("../controllers/reponseApprenantContoller");
+} = require("../controllers/reponseApprenantController");
 
 const authMiddleware = require("../middlewares/authMiddleware");
 
