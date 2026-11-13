@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+﻿const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
 
 const Formation = sequelize.define("Formation", {
@@ -12,15 +12,16 @@ const Formation = sequelize.define("Formation", {
     allowNull: false
   },
   description: {
-    type: DataTypes.STRING(255),
+    type: DataTypes.TEXT,
     allowNull: true
   },
-  dateDebut: {
-    type: DataTypes.DATEONLY,
-    allowNull: false
+  dateCreation: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    defaultValue: DataTypes.NOW
   },
-  dateFin: {
-    type: DataTypes.STRING(20),
+  idFormateur: {
+    type: DataTypes.INTEGER,
     allowNull: true
   }
 }, {

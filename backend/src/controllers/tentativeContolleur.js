@@ -1,5 +1,5 @@
-const { TentativeQuiz, ReponseApprenant, Quiz, Question, Reponse, Evaluation } = require("../models");
-const { verifierQuizAvantTentative } = require("./ControleurQuiz");
+﻿const { TentativeQuiz, ReponseApprenant, Quiz, Question, Reponse, Evaluation } = require("../models");
+const { verifierQuizAvantTentative } = require("./quizController");
 
 const estApprenant = (req) => req.user.role === "apprenant";
 
@@ -15,7 +15,7 @@ exports.demarrerTentative = async (req, res) => {
       codeQuiz: quiz.codeQuiz
     });
     return res.status(201).json({
-      message: "Tentative démarrée.",
+      message: "Tentative dÃ©marrÃ©e.",
       tentative,
       dureeMinutes: quiz.duree,
       questions: quiz.questions.map((q) => ({
@@ -36,15 +36,15 @@ exports.enregistrerReponses = async (req, res) => {
     const tentative = await TentativeQuiz.findByPk(req.params.idTentative);
     if (!tentative) return res.status(404).json({ message: "Tentative introuvable." });
     if (tentative.idUtilisateur !== req.user.idUtilisateur) return res.status(403).json({ message: "Cette tentative ne vous appartient pas." });
-    if (tentative.statut !== "en cours") return res.status(409).json({ message: "Cette tentative est déjà terminée." });
+    if (tentative.statut !== "en cours") return res.status(409).json({ message: "Cette tentative est dÃ©jÃ  terminÃ©e." });
 
     const quiz = await Quiz.findByPk(tentative.codeQuiz);
     const tempsEcoule = (Date.now() - new Date(tentative.dateTentative).getTime()) / 60000;
-    if (tempsEcoule > quiz.duree) return res.status(409).json({ message: "La durée du quiz est dépassée." });
+    if (tempsEcoule > quiz.duree) return res.status(409).json({ message: "La durÃ©e du quiz est dÃ©passÃ©e." });
 
     const reponses = req.body.reponses;
     if (!Array.isArray(reponses) || !reponses.length) {
-      return res.status(400).json({ message: "Envoyez une liste de réponses." });
+      return res.status(400).json({ message: "Envoyez une liste de rÃ©ponses." });
     }
 
     for (const item of reponses) {
@@ -53,7 +53,7 @@ exports.enregistrerReponses = async (req, res) => {
       const ids = Array.isArray(item.numReponses) ? item.numReponses : (item.numReponse ? [item.numReponse] : []);
       if (ids.length) {
         const valides = await Reponse.count({ where: { numReponse: ids, numQuestion: question.numQuestion } });
-        if (valides !== ids.length) return res.status(400).json({ message: "Une ou plusieurs réponses ne correspondent pas à la question." });
+        if (valides !== ids.length) return res.status(400).json({ message: "Une ou plusieurs rÃ©ponses ne correspondent pas Ã  la question." });
       }
     }
 
@@ -78,7 +78,7 @@ exports.enregistrerReponses = async (req, res) => {
       }
     }
     await ReponseApprenant.bulkCreate(rows);
-    return res.json({ message: "Réponses enregistrées.", nombre: rows.length });
+    return res.json({ message: "RÃ©ponses enregistrÃ©es.", nombre: rows.length });
   } catch (error) {
     return res.status(500).json({ message: "Erreur d'enregistrement.", erreur: error.message });
   }
@@ -94,11 +94,11 @@ exports.terminerTentative = async (req, res) => {
     }
     if (tentative.idUtilisateur !== req.user.idUtilisateur && req.user.role !== "administrateur") {
       await transaction.rollback();
-      return res.status(403).json({ message: "Action non autorisée." });
+      return res.status(403).json({ message: "Action non autorisÃ©e." });
     }
     if (tentative.statut !== "en cours") {
       await transaction.rollback();
-      return res.status(409).json({ message: "Tentative déjà terminée." });
+      return res.status(409).json({ message: "Tentative dÃ©jÃ  terminÃ©e." });
     }
 
     const quiz = await Quiz.findByPk(tentative.codeQuiz, {
@@ -124,8 +124,8 @@ exports.terminerTentative = async (req, res) => {
 
     await Promise.all(maj);
     const score = totalPoints > 0 ? Number(((pointsObtenus / totalPoints) * 100).toFixed(2)) : 0;
-    const resultat = score >= Number(quiz.seuilReussite) ? "réussi" : "échoué";
-    await tentative.update({ score, statut: "terminée" }, { transaction });
+    const resultat = score >= Number(quiz.seuilReussite) ? "rÃ©ussi" : "Ã©chouÃ©";
+    await tentative.update({ score, statut: "terminÃ©e" }, { transaction });
     const evaluation = await Evaluation.create({
       score,
       dateEvaluation: new Date(),
@@ -135,7 +135,7 @@ exports.terminerTentative = async (req, res) => {
     }, { transaction });
 
     await transaction.commit();
-    return res.json({ message: "Quiz terminé.", score, totalPoints, pointsObtenus, resultat, evaluation });
+    return res.json({ message: "Quiz terminÃ©.", score, totalPoints, pointsObtenus, resultat, evaluation });
   } catch (error) {
     await transaction.rollback();
     return res.status(500).json({ message: "Erreur lors de la correction.", erreur: error.message });
@@ -154,6 +154,6 @@ exports.mesTentatives = async (req, res) => {
     });
     return res.json(tentatives);
   } catch (error) {
-    return res.status(500).json({ message: "Erreur de récupération.", erreur: error.message });
+    return res.status(500).json({ message: "Erreur de rÃ©cupÃ©ration.", erreur: error.message });
   }
 };

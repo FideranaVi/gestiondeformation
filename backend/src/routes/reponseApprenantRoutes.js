@@ -1,4 +1,4 @@
-
+﻿
 const express = require("express");
 const router = express.Router();
 
@@ -6,7 +6,7 @@ const {
   enregistrerReponseApprenant,
   afficherReponsesApprenant,
   supprimerReponseApprenant
-} = require("../controllers/reponseApprenantController");
+} = require("../controllers/reponseApprenantContoller");
 
 const authMiddleware = require("../middlewares/authMiddleware");
 

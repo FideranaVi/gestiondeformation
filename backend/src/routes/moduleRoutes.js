@@ -4,6 +4,7 @@ const auth = require("../middlewares/authMiddleware");
 const role = require("../middlewares/roleMiddleware");
 
 router.use(auth);
+
 router.get("/", c.listerModules);
 router.get("/:id", c.obtenirModule);
 router.post("/", role("administrateur"), c.creerModule);
