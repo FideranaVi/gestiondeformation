@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const c = require("../controllers/ControleurCertificat");
+const c = require("../controllers/certificatController");
 const auth = require("../middlewares/authMiddleware");
 const role = require("../middlewares/roleMiddleware");
 
