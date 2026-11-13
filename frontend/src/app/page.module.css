@@ -1,0 +1,290 @@
+
+.authPage {
+  min-height: 100vh;
+  background: #f4f7f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 20px;
+  font-family: Arial, sans-serif;
+}
+
+.authContainer {
+  width: 100%;
+  max-width: 1100px;
+  min-height: 680px;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 50px rgba(20, 60, 40, 0.09);
+}
+
+.authSide {
+  background: linear-gradient(145deg, #087b50, #064c36);
+  color: white;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.logo,
+.mobileLogo {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.logo span,
+.mobileLogo span {
+  color: #a8e6c3;
+}
+
+.sideContent {
+  max-width: 390px;
+}
+
+.sideIcon {
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 25px;
+}
+
+.sideContent h1 {
+  font-size: 36px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+.sideContent p {
+  color: #d6eee2;
+  line-height: 1.8;
+  font-size: 15px;
+}
+
+.sideFooter {
+  color: #d6eee2;
+  font-size: 13px;
+}
+
+.authFormSide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 55px 65px;
+}
+
+.formContent {
+  width: 100%;
+  max-width: 420px;
+}
+
+.mobileLogo {
+  display: none;
+  color: #087b50;
+  margin-bottom: 35px;
+}
+
+.welcome {
+  color: #078653;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.formContent h2 {
+  color: #173b2c;
+  font-size: 32px;
+  margin: 12px 0;
+}
+
+.subtitle {
+  color: #84918a;
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 19px;
+}
+
+.formGroup label {
+  color: #344b3e;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.formGroup input {
+  width: 100%;
+  height: 49px;
+  padding: 0 14px;
+  border: 1px solid #dce6df;
+  border-radius: 9px;
+  outline: none;
+  font-size: 14px;
+  color: #263b30;
+  background: #fff;
+  transition: 0.2s;
+}
+
+.formGroup input:focus {
+  border-color: #078653;
+  box-shadow: 0 0 0 3px rgba(7, 134, 83, 0.08);
+}
+
+.formGroup input::placeholder {
+  color: #aab5ae;
+}
+
+.passwordBox {
+  position: relative;
+}
+
+.passwordBox input {
+  padding-right: 85px;
+}
+
+.showPassword {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #078653;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.submitButton {
+  width: 100%;
+  height: 51px;
+  border: none;
+  border-radius: 9px;
+  background: #087b50;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 8px;
+}
+
+.submitButton:hover {
+  background: #065d3e;
+  transform: translateY(-2px);
+}
+
+.submitButton span {
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.switchText {
+  text-align: center;
+  font-size: 13px;
+  color: #84918a;
+  margin-top: 25px;
+}
+
+.switchText a {
+  color: #078653;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.switchText a:hover {
+  text-decoration: underline;
+}
+
+.backHome {
+  display: block;
+  width: fit-content;
+  margin: 25px auto 0;
+  color: #73847a;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.backHome:hover {
+  color: #078653;
+}
+
+.error,
+.success {
+  font-size: 13px;
+  padding: 11px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+}
+
+.error {
+  color: #b42318;
+  background: #fef3f2;
+}
+
+.success {
+  color: #087443;
+  background: #eaf8ef;
+}
+
+.nameGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 800px) {
+  .authContainer {
+    max-width: 550px;
+    grid-template-columns: 1fr;
+  }
+
+  .authSide {
+    display: none;
+  }
+
+  .authFormSide {
+    padding: 45px 35px;
+  }
+
+  .mobileLogo {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .authPage {
+    padding: 12px;
+  }
+
+  .authContainer {
+    border-radius: 14px;
+  }
+
+  .authFormSide {
+    padding: 35px 22px;
+  }
+
+  .nameGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .formContent h2 {
+    font-size: 28px;
+  }
+}
